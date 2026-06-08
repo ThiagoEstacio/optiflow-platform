@@ -106,7 +106,7 @@ services:
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - "6381:6379"
     networks:
       - optiflow-network
     healthcheck:
@@ -181,6 +181,7 @@ services:
     restart: unless-stopped
 
   sim-publisher:
+    profiles: [sim]
     build:
       context: ./connect
       dockerfile: Dockerfile
