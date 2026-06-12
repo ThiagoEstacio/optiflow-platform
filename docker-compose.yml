@@ -36,6 +36,7 @@ services:
   timescaledb:
     image: timescale/timescaledb:latest-pg15
     container_name: optiflow-timescaledb
+    restart: unless-stopped
     environment:
       POSTGRES_DB:       optiflow_historian
       POSTGRES_USER:     historian
@@ -97,6 +98,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: optiflow-redis
+    restart: unless-stopped
     command: >
       redis-server
       --appendonly yes
@@ -138,6 +140,7 @@ services:
   mosquitto:
     image: eclipse-mosquitto:2
     container_name: optiflow-mosquitto
+    restart: unless-stopped
     volumes:
       - ./config/mosquitto:/mosquitto/config
       - mosquitto_data:/mosquitto/data
