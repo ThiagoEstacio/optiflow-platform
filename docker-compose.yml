@@ -175,11 +175,14 @@ services:
       redis:
         condition: service_healthy
     healthcheck:
+      # Frescura, não só existência: o arquivo só é mantido fresco enquanto o
+      # gateway publica (ver _health_loop). Parou de publicar -> mtime envelhece
+      # -> unhealthy. Acaba com o "verde mentiroso".
       test: ["CMD", "python", "-c",
-             "import os; exit(0 if os.path.exists('/app/data/gateway.health') else 1)"]
+             "import os,time; p='/app/data/gateway.health'; exit(0 if os.path.exists(p) and time.time()-os.path.getmtime(p) < 90 else 1)"]
       interval: 30s
       timeout: 10s
-      start_period: 20s
+      start_period: 30s
       retries: 3
     restart: unless-stopped
 
