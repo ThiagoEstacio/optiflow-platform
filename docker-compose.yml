@@ -169,6 +169,13 @@ services:
       DEVICES_DB:   "/app/data/devices.db"
       MGMT_PORT:    "8080"
       LOG_LEVEL:    "INFO"
+      # Channel model (KEPServer-style): 1 conexão : N tags via wildcard.
+      MQTT_CHANNEL_ENABLED: "1"
+      MQTT_CHANNEL_HOST:    "mosquitto"
+      MQTT_CHANNEL_PORT:    "1883"
+      # Para HA horizontal: troque por "$$share/optiflow-ingest/optiflow/#"
+      # (shared subscription MQTT5) e rode N réplicas do gateway dividindo a carga.
+      MQTT_CHANNEL_TOPIC:   "optiflow/#"
     networks:
       - optiflow-network
     depends_on:
