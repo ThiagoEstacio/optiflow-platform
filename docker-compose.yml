@@ -166,11 +166,16 @@ services:
     environment:
       <<: *redis-url
       GATEWAY_ID:   "optiflow-gateway-01"
-      DEVICES_DB:   "/app/data/devices.db"
+      DEVICES_DB:   "/app/data/devices-opcua.db"
       MGMT_PORT:    "8080"
       LOG_LEVEL:    "INFO"
-      # Channel model (KEPServer-style): 1 conexão : N tags via wildcard.
-      MQTT_CHANNEL_ENABLED: "1"
+      # OPERA simulator/SCADA path: OPC-UA server in simulator, OptiFlow as client.
+      OPCUA_AUTODISCOVERY_ENDPOINT: "opc.tcp://simulator-opcua:4840/opera/simulator"
+      OPCUA_AUTODISCOVERY_DEPTH:    "2"
+      OPCUA_AUTODISCOVERY_ATTEMPTS: "30"
+      OPCUA_AUTODISCOVERY_RETRY_S:  "2"
+      # MQTT remains available as a secondary protocol, but is not the simulator path.
+      MQTT_CHANNEL_ENABLED: "0"
       MQTT_CHANNEL_HOST:    "mosquitto"
       MQTT_CHANNEL_PORT:    "1883"
       # Para HA horizontal: troque por "$$share/optiflow-ingest/optiflow/#"
