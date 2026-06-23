@@ -169,8 +169,8 @@ services:
       DEVICES_DB:   "/app/data/devices-opcua.db"
       MGMT_PORT:    "8080"
       LOG_LEVEL:    "INFO"
-      # OPERA simulator/SCADA path: OPC-UA server in simulator, OptiFlow as client.
-      OPCUA_AUTODISCOVERY_ENDPOINT: "opc.tcp://simulator-opcua:4840/opera/simulator"
+      # SCADA path: OPC-UA server in simulator, OptiFlow as client.
+      OPCUA_AUTODISCOVERY_ENDPOINT: "opc.tcp://simulator-opcua:4840/scada/simulator"
       OPCUA_AUTODISCOVERY_DEPTH:    "2"
       OPCUA_AUTODISCOVERY_ATTEMPTS: "30"
       OPCUA_AUTODISCOVERY_RETRY_S:  "2"
